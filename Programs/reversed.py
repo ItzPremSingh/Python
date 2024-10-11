@@ -1,4 +1,13 @@
 def reversed(data):
+    """
+    Checks if given data is reversed or not.
+
+    Args:
+        data (list): list of data to be checked
+
+    Returns:
+        bool: True if reversed, False if not
+    """
     left = 0
     right = -1
 
