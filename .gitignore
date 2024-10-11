@@ -8,6 +8,7 @@
 
 # Do not ignore specific files
 !.gitignore
+!LICENSE
 
 # Ignore virtual environments created by Poetry or venv
 venv/
