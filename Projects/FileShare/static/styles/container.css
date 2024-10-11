@@ -1,8 +1,0 @@
-@import url("variables.css");
-
-.container {
-    background: var(--container-background-color);
-    height: var(--container-height);
-    width: var(--container-width);
-    text-align: center;
-}
