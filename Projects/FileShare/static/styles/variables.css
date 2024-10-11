@@ -1,0 +1,9 @@
+:root {
+  --main-font-family: sans-serif;
+  --main-background-color: #ffffff;
+
+  --container-background-color: #a3b8a3;
+
+  --container-height: 80vh;
+  --container-width: 90vw;
+}

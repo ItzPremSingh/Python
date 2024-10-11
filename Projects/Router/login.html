@@ -1,0 +1,310 @@
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3c.org/TR/1999/REC-html401-19991224/loose.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+	<head>
+		<title>Login</title>
+		<meta http-equiv=Content-Type content="text/html; charset=gb2312">
+		<meta content="Microsoft FrontPage 5.0" name="GENERATOR">
+		<script language='javascript' src='/JS/jquery.js'></script>
+		<script language='javascript' src='/JS/util.js'></script>
+		<style type=text/css>
+			#div_login
+			{
+				FONT-SIZE: 12px; MARGIN: 100px 50px; COLOR: #333333; FONT-FAMILY: "����"
+			}
+			table {
+				FONT-SIZE: 15px; FONT-FAMILY: "����"
+			}
+		</style>
+		<script language="javascript" type=text/javascript>
+		if ( self != top )
+			top.location.href = '/cgi-bin/login.asp';
+		function getsec(str)
+		{
+			var str1=str.substring(1,str.length)*1;    
+			var str2=str.substring(0,1);  
+			if (str2=="s")
+			{  
+				return str1*1000; 
+			}
+			else if (str2=="h")
+			{  
+				return str1*60*60*1000; 
+		  }
+			else if (str2=="d")
+			{  
+				return str1*24*60*60*1000; 
+		  }  
+		}
+		function refreshself()
+		{
+			top.window.location.href ='/cgi-bin/login.asp';
+		}
+
+		function GET_C(Name)
+		{
+			var search = Name + "=";
+			if ( document.cookie.length > 0 )
+			{
+				offset = document.cookie.indexOf(search);
+				if ( offset != -1 )
+				{
+					offset += search.length;
+					end = document.cookie.indexOf(";", offset);
+					if(end == -1) end = document.cookie.length;
+					return unescape(document.cookie.substring(offset, end));
+				}
+				else
+				return "";
+			}
+			else
+			return "";
+		}
+		
+		function SET_C_T(name, value, time)
+		{
+			var strsec = getsec(time); 
+			var exp = new Date();  
+			exp.setTime(exp.getTime() + strsec*1);  
+			document.cookie = name + "="+ escape (value) + ";expires=" + exp.toGMTString()+";path=/;";
+		} 
+
+		function SET_C(name, value)
+		{
+			document.cookie = name + "="+ escape (value) + ";path=/;";
+		}
+
+		function DEL_C(name)
+		{
+			var exp = new Date();
+			exp.setTime(exp.getTime() - 10000);
+			document.cookie = name + "=del;expires=" + exp.toGMTString();
+			document.cookie = name + "=del;expires=" + exp.toGMTString()+";path=/;";
+		}
+
+		function onHandleKeyDown(e)
+		{
+			var key = 0;
+			if (window.event)
+			{
+				key = window.event.keyCode;
+			}
+			else if (e)
+			{
+				key = e.which;
+			}
+			if (key == 13 && document.activeElement.id != 'loginbutton')
+			{
+				doLogin();
+			}
+		}
+		document.onkeypress = onHandleKeyDown;
+
+		var loginTimes = 0;
+
+		function doLogin()
+		{
+			var Captchastr = document.getElementById('ValidateCode');
+			var Captchaimg = document.getElementById('captchaimg').src;
+			var Captchaurl = document.getElementById('Captcha_url');	
+			var captcha  ="";
+			var captchaIndx ="";
+			/* check empty */
+			if ( 0 == $('#username').val().length )
+			{
+				alert('Username cannot be null');
+				return false;
+			}
+
+			if ( 0 == $('#password').val().length )
+			{
+				alert('Password cannot be null');
+				return false;
+			}
+
+			if (Captchastr.value == "")
+			{
+				alert('ValidateCode cannot be null');
+				return false;
+			}
+	
+			captcha = Captchaimg.split("_");
+			captchaIndx = captcha[1].split(".");	
+			Captchaurl.value = captchaIndx[0];
+
+			if( (GET_C("loginTimes") != "") && (typeof(GET_C("loginTimes")) != "undefined") )
+				loginTimes = parseInt(GET_C("loginTimes"));
+			if ( loginTimes >= 3 )
+			{
+				$('#errmsg').text('Login three times fail, Webpage locked,please login after 1 minute!');
+				return false;	
+			}
+			SET_C_T("loginTimes", loginTimes, "s60");
+			var form = $('#loginui');
+	    $.ajax({
+	        url: login_check_addr,
+	        type: form.attr("method"),
+	        data: form.serialize(),
+	        dataType: "json",
+	        beforeSend: function () 
+	        {
+	        	$('#loginbutton').attr('disabled', true);
+	        },
+	        error: function ()
+	        {
+	        	$('#loginbutton').attr('disabled', false);
+	 					alert('fetal error!');
+	        },
+	        complete:function ()
+	        {
+	        	$('#loginbutton').attr('disabled', false);
+	        },
+	        success: function (result)
+	        {
+	        		if ( '1' == result.Locked )
+	        		{
+	        				$('#errmsg').text('Login three times fail, Webpage locked,please login after 1 minute!');
+	        				loginTimes = 0;
+	        				DEL_C('loginTimes');
+	        		}
+	        		else if ( '1' == result.Logged )
+	        		{
+	        				$('#errmsg').text('Admistrator account is login!');
+	        				loginTimes = 0;
+	        				DEL_C('loginTimes');		
+	        		}
+	        		else if ( '2' == result.Logged )
+	        		{
+	        				$('#errmsg').text('User account is already login!');
+	        				loginTimes = 0;
+	        				DEL_C('loginTimes');
+	        		}
+				else if( '2' == result.CaptchaOK )
+				{
+						$('#errmsg').text('ValidateCode Error');
+				}
+	        		else if ( '0' == result.Privilege )
+	        		{
+	        				loginTimes += 1;
+									SET_C_T("loginTimes", loginTimes, "s60");
+	        				$('#errmsg').text('You already login incorrectly for ' +  loginTimes + ' time!');      			
+	        		}
+	        		else if ( '1' == result.Privilege || '2' == result.Privilege )
+	        		{
+	        				loginTimes = 0;
+	        				DEL_C('loginTimes');
+	        				SET_C('ecntToken', result.ecntToken);
+	        				top.location.href = '/cgi-bin/content.asp';
+	        		}
+	        }
+	    });
+		}
+
+		function LoadFrame()
+		{
+			$('#username').val('admin');
+			$('#username').focus();
+		}
+
+		
+		function LanguageSelect()
+		{			
+			var vForm = document.loginui;
+			vForm.selectLanguage.value = "English";
+			switch (vForm.selectLanguage.value)
+			{
+				case 'Chinese':
+				vForm.Language_Flag.value = "1";	
+				break;
+
+				case 'English':
+				vForm.Language_Flag.value = "2";
+				break;
+				
+				default:
+				vForm.Language_Flag.value = "2";
+				break;
+			}
+
+			document.loginui.submit();
+		}
+ 
+	</script>
+	<body onload="LoadFrame()">
+		<div id=div_login >
+			<form id="loginui" name="loginui" method="post">
+				<table style="POSITION: relative" borderColor="#e7e7e7" height="45%" cellSpacing="0" cellPadding="0" align="center" bgColor="#e7e7e7" border="0" width="450">
+					<tbody>
+							<tr>
+								<td align="middle" bgColor="#ffffff" colSpan="3" height="10">
+									<label><img height="160" src="/img/logo.jpg" width="300" align="center"></label>
+								</td>
+							</tr>
+							<tr>
+								<td colspan="3" height="20" bgcolor="#ffffff" align="center"></td>
+							</tr>
+							<tr>
+								<td align=right width="30%" height=50>
+									Username: 
+								</td>
+								<td width=30>��</td>
+								<td>
+										<label>
+											<input id="username" style="WIDTH: 140px; FONT-FAMILY: Arial" name="username" size="20" autocomplete="off"> 
+										</label>
+								</td>
+							</tr>
+
+							<tr>
+								<td align=right height=30>
+									Password: 
+								</td>
+								<td>��</td>
+								<td>
+									<input id="password" style="WIDTH: 140px; FONT-FAMILY: Arial" type="password" name="password" size="20" autocomplete="off">
+								</td>
+							</tr>
+							<tr>
+								<td align=right height=50>ValidateCode</td>
+									<td>��</td>
+								<TD>
+								<INPUT id="ValidateCode" style="WIDTH: 140px; FONT-FAMILY: Arial" type="validateCode" name="validateCode" size="20">
+								</TD>
+								<td>
+									<input id="Captcha_url" type="hidden" name="captcha_url" value="">
+								</td>
+							</tr>
+							<TR>
+							<TD align=right height=30>
+							</TD>
+								<TD>��</TD>	
+								<TD><div id="Valitag">&nbsp &nbsp;
+								<INPUT id="Refresh" onclick="refreshself()" type="button" value="Refresh" name="Refresh" style ="position:absolute;top:75%;margin-top:-button">
+							 	 </div> </TD>	
+							<SCRIPT language=javascript>
+								var Valivalue ="";
+								var html = "";
+								var url = "/captcha/";
+								var ValitagValue = document.getElementById('Valitag');
+								
+								Valivalue ="captcha_5";
+								html = "<img id = captchaimg  name=captchaimg src=" + url + Valivalue+ ".gif height=60px width=160px>";
+								ValitagValue.insertAdjacentHTML('afterbegin', html);
+							</SCRIPT>
+						</TR> 
+							<tr>
+								<td style="COLOR: #ff0000" align="center" colspan="3" id='errmsg' name='errmsg'>
+								</td>
+							</tr>
+							<tr>
+									<td align=center colSpan=3>
+										<input id="loginbutton" onclick="doLogin()" type="button" value="Login" name="loginbutton">
+										&nbsp;
+									</td>
+							</tr>
+					</tbody>
+			</table>
+			</form>
+		</div>
+</body>
+</html>

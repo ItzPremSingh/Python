@@ -1,0 +1,11 @@
+{
+  "background_color": "rgba(255, 225, 225, 150)",
+  "border_color": "#000000",
+  "border_thickness": 5,
+  "text_color": "#FFFFFF",
+  "shadow_color": "#808080",
+  "shadow_offset": [2, 2],
+  "font_size": 35,
+  "width": 200,
+  "height": 100
+}

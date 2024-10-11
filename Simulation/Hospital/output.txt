@@ -1,0 +1,123 @@
+Hospital Simulator
+
+1. Patient Management
+2. Staff Management
+3. Resource Management
+4. Patient Treatment
+5. Emergency Response
+6. Reporting and Analytics
+7. Exit
+
+Enter your choice: 1
+
+Hospital Simulator - Patient Management
+
+1. Add Patient
+2. List Patients
+3. Discharge Patient
+4. Back
+
+Enter your choice: 1
+
+Enter patient details:
+Name: John Doe
+Age: 45
+Gender: Male
+Medical Condition: Chest pain
+
+Patient added successfully!
+
+Hospital Simulator - Patient Management
+
+1. Add Patient
+2. List Patients
+3. Discharge Patient
+4. Back
+
+Enter your choice: 2
+
+Hospital Simulator - List of Patients
+
+Name: John Doe, Age: 45, Gender: Male, Condition: Chest pain
+
+Hospital Simulator - Patient Management
+
+1. Add Patient
+2. List Patients
+3. Discharge Patient
+4. Back
+
+Enter your choice: 3
+
+Enter patient name to discharge: John Doe
+
+John Doe discharged successfully!
+
+Hospital Simulator - Patient Management
+
+1. Add Patient
+2. List Patients
+3. Discharge Patient
+4. Back
+
+Enter your choice: 4
+
+Hospital Simulator
+
+1. Patient Management
+2. Staff Management
+3. Resource Management
+4. Patient Treatment
+5. Emergency Response
+6. Reporting and Analytics
+7. Exit
+
+Enter your choice: 2
+
+Hospital Simulator - Staff Management
+
+1. Add Staff
+2. List Staff
+3. Back
+
+Enter your choice: 1
+
+Enter staff details:
+Name: Dr. Smith
+Role: Cardiologist
+
+Staff added successfully!
+
+Hospital Simulator - Staff Management
+
+1. Add Staff
+2. List Staff
+3. Back
+
+Enter your choice: 2
+
+Hospital Simulator - List of Staff
+
+Name: Dr. Smith, Role: Cardiologist
+
+Hospital Simulator - Staff Management
+
+1. Add Staff
+2. List Staff
+3. Back
+
+Enter your choice: 3
+
+Hospital Simulator
+
+1. Patient Management
+2. Staff Management
+3. Resource Management
+4. Patient Treatment
+5. Emergency Response
+6. Reporting and Analytics
+7. Exit
+
+Enter your choice: 7
+
+Exiting...

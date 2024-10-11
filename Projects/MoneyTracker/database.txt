@@ -1,0 +1,10 @@
+"""
+CREATE TABLE IF NOT EXISTS Money (
+    transactionID INTEGER PRIMARY KEY AUTOINCREMENT,
+    transactionDate DATE,
+    description VARCHAR(100),
+    amount INTEGER,
+    transactionType TEXT CHECK(transactionType IN ('credit', 'debit')),
+    balance INTEGER
+)
+"""

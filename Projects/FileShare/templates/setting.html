@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Setting page</title>
+  <link rel="stylesheet" href="/bootstrap/css/bootstrap.min.css">
+  <link rel="stylesheet" href="/bootstrap/css/select2.min.css">
+  <link rel="stylesheet" href="/static/style/setting.css">
+</head>
+
+<body class="d-flex align-items-center justify-content-center vh-100">
+  <div class="container p-5 rounded shadow-lg">
+    <form id="settingsForm">
+      <div class="mb-3">
+        <label for="settingType" class="form-label font-weight-bold text-dark">Select Setting:</label>
+        <div class="input-group">
+          <select class="form-select" id="settingType" onchange="changeSettingType()">
+            <option value="color:--main-background-color">Main Background Colour</option>
+            <option value="color:--container-background-color">Container Background Colour</option>
+            <option value="number:--container-height">Container Height</option>
+            <option value="number:--container-width">Container Width</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="mb-3">
+        <label for="settingInput" class="form-label">Setting Value:</label>
+        <input type="text" class="form-control" id="settingInput" required>
+      </div>
+
+      <button type="button" class="btn btn-primary btn-left" onclick="saveSettings()">Save Settings</button>
+      <button type="button" class="btn btn-danger btn-right" onclick="resetSettings()">Reset Settings</button>
+    </form>
+  </div>
+
+  <script src="/bootstrap/javascript/bootstrap.bundle.min.js"></script>
+  <script src="/bootstrap/javascript/jquery.min.js"></script>
+  <script src="/bootstrap/javascript/select2.min.js"></script>
+  <script src="/static/script/setting.js"></script>
+  <script src="/static/script/initilize.js"></script>
+
+  <script>
+    $(document).ready(function () {
+      $('#settingType').select2();
+    });
+  </script>
+
+</body>
+
+</html>

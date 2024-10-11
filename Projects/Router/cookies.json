@@ -1,0 +1,11 @@
+[
+  {
+    "domain": "192.168.1.1",
+    "httpOnly": false,
+    "name": "ecntToken",
+    "path": "/",
+    "sameSite": "Lax",
+    "secure": false,
+    "value": "241a029d93e126e02c0ece665a6e7ee4a"
+  }
+]

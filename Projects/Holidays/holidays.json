@@ -1,0 +1,112 @@
+{
+  "months": {
+    "January": {
+      "13": {
+        "name": "Lohri"
+      },
+      "14": {
+        "name": "Makar Sankranti"
+      },
+      "26": {
+        "name": "Republic Day"
+      }
+    },
+    "February": {
+      "14": {
+        "name": "Basant Panchami"
+      },
+      "24": {
+        "name": "Ravidas Jayanti"
+      }
+    },
+    "March": {
+      "8": {
+        "name": "Maha Shivratri"
+      },
+      "24": {
+        "name": "Holi"
+      },
+      "25": {
+        "name": "Dhulendi"
+      },
+      "29": {
+        "name": "Good Friday"
+      }
+    },
+    "April": {
+      "11": {
+        "name": "Id-ul-Fitr"
+      },
+      "13": {
+        "name": "Baisakhi"
+      },
+      "14": {
+        "name": "Ambedkar Jayanti"
+      },
+      "17": {
+        "name": "Ram Navami"
+      },
+      "21": {
+        "name": "Mahavir Jayanti"
+      }
+    },
+    "May": {
+      "23": {
+        "name": "Budh Purnima"
+      }
+    },
+    "June": {
+      "17": {
+        "name": "Id-ul-Zuha"
+      }
+    },
+    "July": {
+      "17": {
+        "name": "Muharram"
+      }
+    },
+    "August": {
+      "15": {
+        "name": "Independence Day"
+      },
+      "19": {
+        "name": "Raksha Bandhan"
+      },
+      "26": {
+        "name": "Janmashtami"
+      }
+    },
+    "September": {
+      "17": {
+        "name": "Anant Chaudas and Id-e-Milad"
+      }
+    },
+    "October": {
+      "2": {
+        "name": "Gandhi Jayanti"
+      },
+      "12": {
+        "name": "Dushera"
+      },
+      "17": {
+        "name": "Balmiki Jayanti"
+      }
+    },
+    "November": {
+      "1": {
+        "name": "Diwali"
+      },
+      "3": {
+        "name": "Bhaiya Dooj"
+      },
+      "15": {
+        "name": "Guru Nanak Birthday"
+      }
+    },
+    "December": {
+      "25": {
+        "name": "X-Mas Day"
+      }
+    }
+  }
+}

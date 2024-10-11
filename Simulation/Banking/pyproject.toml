@@ -1,0 +1,18 @@
+[tool.poetry]
+name = "banking"
+version = "0.1.0"
+description = "Bank management system"
+authors = ["Noob Developer <you@example.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.11"
+pony = "^0.7.17"
+fastapi = {extras = ["all"], version = "^0.110.0"}
+passlib = {extras = ["bcrypt"], version = "^1.7.4"}
+python-jose = {extras = ["cryptography"], version = "^3.3.0"}
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Upload Files</title>
+
+    <link rel="stylesheet" href="/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/static/style/upload.css">
+</head>
+
+<body class="d-flex align-items-center justify-content-center vh-100">
+    <div class="container p-5 rounded shadow-lg">
+        <div class="mb-4">
+            <label for="customFile" class="form-label">Choose a file:</label>
+            <input type="file" class="form-control" id="customFile" multiple="true" onchange="changeButton()">
+        </div>
+        <button type="button" id="uploadButton" class="btn btn-primary" onclick="uploadFiles()"
+            disabled="true">Upload</button>
+    </div>
+
+
+    <div class="modal fade" id="overlayModal" tabindex="-1" aria-labelledby="overlayModalLabel" aria-hidden="true"
+        data-bs-backdrop="static">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="overlayModalLabel">Upload Progress</h5>
+                    <button type="button" class="btn-close" id="closeButton" data-bs-dismiss="modal"
+                        aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+
+                    <div class="progress mb-3">
+                        <div class="progress-bar" role="progressbar" style="width: 0%;" aria-valuenow="0"
+                            aria-valuemin="0" aria-valuemax="100" id="progressBar"></div>
+                    </div>
+
+
+                    <p><span id="filesUploaded">0</span> file(s) uploaded out of <span id="totalFiles">0</span>.</p>
+                    <span id="status"></span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="/bootstrap/javascript/bootstrap.min.js"></script>
+    <script src="/static/script/upload.js"></script>
+    <script src="/static/script/initilize.js"></script>
+</body>
+
+</html>
