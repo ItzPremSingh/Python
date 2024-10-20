@@ -1,1 +1,0 @@
-SECRET_TOKEN = "!2SbF%wL@E&6Rz9gY*pU3v$Qc^a7dK@Jn5q2!D7C!wEjxg8S4"
