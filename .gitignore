@@ -1,32 +1,23 @@
-# Ignore everything
-/*
+Webapp/aqi.py
+Webapp/cricket.py
+Webapp/news.py
+Webapp/weather.py
+Webapp/qrcode.py
 
-# Do not ignore specific folders
-!/Programs/
-!/Projects/
-!/Simulation/
+Projects/FileShare
 
-# Do not ignore specific files
-!.gitignore
-!LICENSE
+AST/
 
-# Ignore virtual environments created by Poetry or venv
 venv/
 .env/
 
-# Ignore Python cache files
 *.pyc
 __pycache__/
 
-# Ignore Poetry lock file (optional, you can include it if you want)
-# poetry.lock
-
-# Ignore system-specific or temporary files
 *.log
 *.swp
 *~
 .DS_Store
 Thumbs.db
 
-# Ignore VS Code settings (optional, if you don't want to share them)
 .vscode/
