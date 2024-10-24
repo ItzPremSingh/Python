@@ -1,5 +1,6 @@
-from helper import fetch
 from json import loads
+
+from helper import fetch
 
 text = fetch("https://api.ipify.org/?format=json")
 loaded = loads(text)
@@ -18,6 +19,7 @@ def formatter(__dict: dict):
     print("Timezone:", get("timezone"))
 
 
-ipdata = loads(fetch(f"https://ipinfo.io/{ip}/geo"))
-
+s = fetch(f"https://ipinfo.io/{ip}/geo")
+ipdata = loads(s)
+print(s)
 formatter(ipdata)

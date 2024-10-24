@@ -677,38 +677,3 @@ class Fraction:
 
     def __ge__(self, other):
         return self.__gt__(other) or self.__eq__(other)
-
-
-class Shape2d:
-    pass
-
-
-class Shape3d:
-    pass
-
-
-class Square(Shape2d):
-    def area(self, length):
-        return length * length
-
-    def perimeter(self, length):
-        return length * 4
-
-
-class Rectangle(Shape2d):
-    def area(self, length, height):
-        return length * height
-
-    def perimeter(self, length, height):
-        return 2 * (length + height)
-
-
-class Circle(Shape2d):
-    def __init__(self):
-        self.pi = 3.14159
-
-    def area(self, radius):
-        return self.pi * radius**2
-
-    def circumference(self, radius):
-        return 2 * self.pi * radius
