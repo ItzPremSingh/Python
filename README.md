@@ -1,12 +1,11 @@
 # My Python Projects Repository
 
-Welcome to my repository showcasing all my Python projects! This repository contains a collection of Python scripts and applications organized into three main folders: **Programs**, **Projects**, **Simulation**, **Webapp**, and **Leetcode**.
+Welcome to my repository showcasing all my Python projects! This repository contains a collection of Python scripts and applications organized into three main folders: **Programs**, **Projects**, **Webapp**, and **Leetcode**.
 
 ## Table of Contents
 
 - [Programs](#programs)
 - [Projects](#projects)
-- [Simulation](#simulation)
 - [Webapp](#webapp)
 - [Leetcode](#leetcode)
 - [License](#license)
@@ -19,10 +18,6 @@ The **Programs** folder contains various Python scripts that address specific pr
 ## Projects
 
 The **Projects** folder includes larger projects that may consist of multiple scripts and possibly a user interface.
-
-## Simulation
-
-The **Simulation** folder features programs designed to simulate real-world processes or scenarios.
 
 ## Webapp
 
