@@ -5,6 +5,12 @@ from sql import conn, cursor
 
 
 def register() -> None:
+    """
+    Allows the user to register.
+
+    Prompts the user for a username and a password, and registers the user if
+    the password is confirmed correctly.
+    """
     username = input("Enter a username: ")
     password = getpass("Enter a password: ")
     confirm_password = getpass("Confirm password: ")
@@ -21,6 +27,12 @@ def register() -> None:
 
 
 def login() -> None:
+    """
+    Allows the user to login.
+
+    Prompts the user for a username and a password, and logs them in if the
+    username and password are correct.
+    """
     username = input("Enter your username: ")
 
     user = User(username)
@@ -140,6 +152,9 @@ def login() -> None:
 
 
 def admin() -> None:
+    """
+    Allows the admin to view all users and their balances.
+    """
     if getpass("Enter the admin password: ") != "password":
         print("Invalid admin password. Access denied.")
         return

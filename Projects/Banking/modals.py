@@ -12,14 +12,23 @@ class User:
         self.password = password
 
     def __check_for_password(self) -> None:
+        """
+        Raises a ValueError if the password is None.
+        """
         if self.password is None:
             raise ValueError("Password is required")
 
     def isRegistered(self) -> bool:
+        """
+        Returns True if the user is registered, False otherwise.
+        """
         self.cursor.execute("SELECT * FROM users WHERE username = ?", (self.username,))
         return self.cursor.fetchone() is not None
 
     def isAuthenticated(self) -> bool:
+        """
+        Returns True if the user is authenticated, False otherwise.
+        """
         self.__check_for_password()
         user = self.cursor.execute(
             "SELECT username FROM users WHERE username = ? AND password = ?",
@@ -31,6 +40,10 @@ class User:
         return user.fetchone() is not None
 
     def register(self) -> bool:
+        """
+        Registers the user in the database.
+        Returns True if the user is registered, False otherwise.
+        """
         self.__check_for_password()
         if not self.isRegistered():
             self.cursor.execute(
@@ -46,6 +59,9 @@ class User:
         return False
 
     def increaseLoginAttempts(self) -> None:
+        """
+        Increases the login attempts for the user.
+        """
         self.cursor.execute(
             "UPDATE users SET login_attempts = login_attempts + 1 WHERE username = ?",
             (self.username,),
@@ -53,6 +69,9 @@ class User:
         self.conn.commit()
 
     def unlock(self) -> None:
+        """
+        Resets the login attempts and lockout for the user.
+        """
         self.cursor.execute(
             "UPDATE users SET login_attempts = 0, login_lockout = NULL WHERE username = ?",
             (self.username,),
@@ -60,6 +79,9 @@ class User:
         self.conn.commit()
 
     def lock(self) -> None:
+        """
+        Sets the login lockout for the user.
+        """
         self.cursor.execute(
             "UPDATE users SET login_lockout = datetime('now', 'localtime', '+60 seconds') WHERE username = ?",
             (self.username,),
@@ -67,12 +89,18 @@ class User:
         self.conn.commit()
 
     def getLoginAttempts(self) -> int:
+        """
+        Returns the login attempts for the user.
+        """
         self.cursor.execute(
             "SELECT login_attempts FROM users WHERE username = ?", (self.username,)
         )
         return self.cursor.fetchone()[0]
 
     def getLoginLockout(self) -> datetime | None:
+        """
+        Returns the login lockout for the user.
+        """
         loginLockout = self.cursor.execute(
             "SELECT login_lockout FROM users WHERE username = ?", (self.username,)
         ).fetchone()[0]
@@ -83,6 +111,9 @@ class User:
         return None
 
     def isUnlocked(self) -> bool:
+        """
+        Returns True if the user is unlocked, False otherwise.
+        """
         self.cursor.execute(
             "SELECT login_lockout FROM users WHERE username = ?", (self.username,)
         )
@@ -101,12 +132,18 @@ class UserAccount:
         self.username = username
 
     def getBalance(self) -> float:
+        """
+        Returns the balance of the user.
+        """
         self.cursor.execute(
             "SELECT balance FROM users WHERE username = ?", (self.username,)
         )
         return float(self.cursor.fetchone()[0])
 
     def deposit(self, amount: float) -> None:
+        """
+        Deposits the given amount into the user's account.
+        """
         self.cursor.executescript(
             f"""
             UPDATE users SET balance = balance + {amount!r} WHERE username = {self.username!r};
@@ -116,6 +153,10 @@ class UserAccount:
         self.conn.commit()
 
     def withdraw(self, amount: float) -> bool:
+        """
+        Withdraws the given amount from the user's account.
+        Returns True if the withdrawal is successful, False otherwise.
+        """
         balance = self.cursor.execute(
             "SELECT balance FROM users WHERE username = ?", (self.username,)
         )
@@ -134,6 +175,10 @@ class UserAccount:
         return False
 
     def transfer(self, username: str, amount: float) -> bool:
+        """
+        Transfers the given amount from the user's account to another user.
+        Returns True if the transfer is successful, False otherwise.
+        """
         if self.getBalance() >= amount:
             self.cursor.executescript(
                 f"""
@@ -154,6 +199,9 @@ class UserAccount:
     ) -> list[
         tuple[int, Literal["deposit", "withdraw", "transfer", "receive"], datetime]
     ]:
+        """
+        Returns the transaction history for the user.
+        """
         data = []
         self.cursor.execute(
             "SELECT amount, type, timestamp FROM transactions WHERE username = ?",
